@@ -35,7 +35,7 @@ for i in range(0,20): #Starts at 0. (0,1) will play 1 game with i==0
     print_board(thisGame.board)
     print(msg(score(thisGame)))
     thisGameBoards = thisGameBoards[~np.all(thisGameBoards == 0, axis=1)]
-    thisGameScores = np.full(len(thisGameBoards), score(thisGame), dtype=np.int)
+    thisGameScores = np.full(len(thisGameBoards), score(thisGame) + 1, dtype=np.int)
     if i == 0: ## Initializing the arrays
         allGameBoards = thisGameBoards
         allGameScores = thisGameScores
