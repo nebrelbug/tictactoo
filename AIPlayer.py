@@ -1,12 +1,47 @@
 import random
+from tensorflow import keras
+import numpy as np
+
+# import os
+# checkpoint_path = "training_1/cp.ckpt"
+# checkpoint_dir = os.path.dirname(checkpoint_path)
+model = keras.models.load_model(
+    'savedmodel',
+    custom_objects=None,
+    compile=True
+)
+
 class Player:
     def __init__(self, XO): ## Player always sees itself as X. So if it's O, we multiply the board by -1
         self.piece = XO
     
-    def play(self, board, model):
+    def play(self, game, piece):
+        self.piece = piece
         #if self.piece == 'o':
-        next_positions = []
+        open = game.open_positions()
+        next_positions = np.zeros((len(open), 9), dtype=int)
+
+        for i in range(0,len(open)):
+            print('open[i]: ' + str(open[i]))
+            next_positions[i] = game.return_move(piece, open[i])
+        #print('next positions: ' + next_positions)
         predictions = model.predict(next_positions)
+        #print("predictions: " + predictions[0])
+        move_to_return = open[0] # default move
+        move_prob = 0
+        move_prediction = 2
+        if piece == 'o':
+            print('')
+        elif piece == 'x':
+            for prediction in predictions:
+                if np.argmax(prediction) <= move_prediction and prediction[0] > move_prob: # if winner is better than the last moves 
+                                                                                           # winner and prob > last prob
+                    move_to_return = prediction
+                    move_prob = prediction[0]
+                    move_prediction = np.argmax(prediction)
+
+        return move_to_return
+
     
     def play_random(self, game):
         #print("game.board before play: " + ''.join(str(e) for e in game.board))

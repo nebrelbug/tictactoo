@@ -21,12 +21,24 @@ class Game():
         else:
             return 'error'
 
+    def return_move(self, player, pos): # player is 'X' or 'O'. Pos is an integer from 0 to 8
+        return_board = self.board
+        print('pos: ' + str(pos))
+        if return_board[pos] == 0:
+            if player == 'x':
+                return_board[pos] = -1
+            elif player == 'o':
+                return_board[pos] = 1
+        else:
+            return 'error'
+        return return_board
+
     def open_positions(self):
-        open = np.array([])
+        open = np.array([], dtype=int)
         for i in range(0,9):
             if self.board[i] == 0:
                 open = np.append(open, i)
         #print(open)
-        return open.astype(int)
+        return open
 
 game = Game()

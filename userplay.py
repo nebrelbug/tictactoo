@@ -14,10 +14,11 @@ def playGame():
         aiPlayer = 'x'
     else:
         print("You are X and go first")
+        aiPlayer = 'o'
     ai = AI.Player(aiPlayer)
     while score(thisGame) == 'none':
         if aiPlayer == 'x':
-            thisGame.move('x', ai.play_random(thisGame)) ## player, pos
+            thisGame.move('x', ai.play(thisGame, 'x')) ## player, pos
             print_board(thisGame.board)
             if score(thisGame) != 'none':
                 print_board(thisGame.board)
@@ -40,7 +41,7 @@ def playGame():
                 print_board(thisGame.board)
                 print(msg(score(thisGame)))
                 break
-            thisGame.move('o', ai.play_random(thisGame)) ## player, pos
+            thisGame.move('o', ai.play(thisGame, 'o')) ## player, pos
             # print_board(thisGame.board)
             if score(thisGame) != 'none':
                 print_board(thisGame.board)

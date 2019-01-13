@@ -3,6 +3,9 @@ import tensorflow as tf
 from tensorflow import keras
 from randomboards import training_boards
 from randomscores import training_scores
+import os
+checkpoint_path = "training_1/cp.ckpt"
+checkpoint_dir = os.path.dirname(checkpoint_path)
 
 # Helper libraries
 import numpy as np
@@ -12,18 +15,35 @@ print(tf.__version__)
 
 class_names = ['X', 'draw', 'O']
 
-model = keras.Sequential([
-    keras.layers.Flatten(input_shape=(9)),
-    keras.layers.Dense(18, activation=tf.nn.relu),
-    keras.layers.Dense(3, activation=tf.nn.softmax)
-])
+# Returns a short sequential model
+def create_model():  
+    model = keras.Sequential([
+        keras.layers.Dense(18, activation=tf.nn.relu),
+        keras.layers.Dense(8, activation=tf.nn.relu),
+        keras.layers.Dense(8, activation=tf.nn.relu),
+        #keras.layers.SimpleRNN(units=2),
+        keras.layers.Dense(8, activation=tf.nn.relu),
 
-model.compile(optimizer=tf.train.AdamOptimizer(), 
-              loss='sparse_categorical_crossentropy',
-              metrics=['accuracy'])
+        #keras.layers.Dense(64, activation=tf.nn.relu),
+        keras.layers.Dense(3, activation=tf.nn.softmax)
+    ])
+  
+    model.compile(optimizer=tf.train.AdamOptimizer(learning_rate=0.001), 
+                loss='sparse_categorical_crossentropy',
+                metrics=['accuracy'])
+  
+    return model
 
-model.fit(training_boards, training_scores, epochs=5)
+model = create_model()
 
+# Create checkpoint callback
+#cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path, save_weights_only=True, verbose=1, period=5)
+
+model.fit(training_boards, training_scores, epochs=10)  # pass callback to training)
+keras.models.save_model(
+    model,
+    'savedmodel',
+)
 #test_loss, test_acc = model.evaluate(test_images, test_labels)
 
 #print('Test accuracy:', test_acc)
