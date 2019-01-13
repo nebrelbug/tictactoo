@@ -19,11 +19,13 @@ class Player:
         self.piece = piece
         #if self.piece == 'o':
         open = game.open_positions()
-        next_positions = np.array([], dtype=int)
+        next_positions = np.zeros((9, 9), dtype=np.int)
 
         for i in range(0,len(open)):
             print('open[i]: ' + str(open[i]))
             next_positions[i] = game.return_move(piece, open[i])
+            
+        next_positions = next_positions[~np.all(next_positions == 0, axis=1)]
         #print('next positions: ' + next_positions)
         predictions = model.predict(next_positions)
         #print("predictions: " + predictions[0])
