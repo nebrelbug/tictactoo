@@ -19,7 +19,7 @@ class Player:
         self.piece = piece
         #if self.piece == 'o':
         open = game.open_positions()
-        next_positions = np.zeros((len(open), 9), dtype=int)
+        next_positions = np.array([], dtype=int)
 
         for i in range(0,len(open)):
             print('open[i]: ' + str(open[i]))
@@ -28,18 +28,20 @@ class Player:
         predictions = model.predict(next_positions)
         #print("predictions: " + predictions[0])
         move_to_return = open[0] # default move
+        print("default move_to_return: " + str(move_to_return))
         move_prob = 0
         move_prediction = 2
         if piece == 'o':
             print('')
         elif piece == 'x':
-            for prediction in predictions:
-                if np.argmax(prediction) <= move_prediction and prediction[0] > move_prob: # if winner is better than the last moves 
+            for index, prediction in enumerate(predictions):
+                if np.argmax(prediction) <= move_prediction and prediction[np.argmax(prediction)] > move_prob: # if winner is better than the last moves 
                                                                                            # winner and prob > last prob
-                    move_to_return = prediction
+                    move_to_return = index
                     move_prob = prediction[0]
                     move_prediction = np.argmax(prediction)
-
+        print('move_to_return: ' + str(move_to_return))
+        print('move\'s type: ' + type(move_to_return).__name__)
         return move_to_return
 
     

@@ -18,7 +18,8 @@ def playGame():
     ai = AI.Player(aiPlayer)
     while score(thisGame) == 'none':
         if aiPlayer == 'x':
-            thisGame.move('x', ai.play(thisGame, 'x')) ## player, pos
+            print("ai wants to move: " + ai.play(thisGame, 'x'))
+            thisGame.move('x', str(ai.play(thisGame, 'x'))) ## player, pos
             print_board(thisGame.board)
             if score(thisGame) != 'none':
                 print_board(thisGame.board)
@@ -41,6 +42,7 @@ def playGame():
                 print_board(thisGame.board)
                 print(msg(score(thisGame)))
                 break
+            print("ai wants to move: " + str(ai.play(thisGame, 'o')))
             thisGame.move('o', ai.play(thisGame, 'o')) ## player, pos
             # print_board(thisGame.board)
             if score(thisGame) != 'none':
