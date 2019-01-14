@@ -1,3 +1,5 @@
+from printboard import print_board
+
 def is_game_won(game):
     board = game.board
     result = 'none'
@@ -22,10 +24,11 @@ def is_game_won(game):
     return result
 
 
-def human_readable(score):
+def msg(score, board):
     if score == -1:
-        return "X wins!"
+        print("X wins!")
     elif score == 1:
-        return "O wins!"
+        print("O wins!")
     else:
-        return "It's a draw!"
+        print("It's a draw!")
+    print_board(board)

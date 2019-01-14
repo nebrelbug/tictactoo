@@ -1,5 +1,7 @@
 import tensorflow as tf
 from tensorflow import keras
+import copy
+from printboard import print_board
 
 # Helper libraries
 import numpy as np
@@ -7,11 +9,11 @@ import matplotlib.pyplot as plt
 
 class Game():
     def __init__(self):
-        self.board = np.array([0,0,0,0,0,0,0,0,0]).astype(int) # X's are -1, O's are +1. X always goes first
+        self.board = np.array([0,0,0,0,0,0,0,0,0], dtype=int) # X's are -1, O's are +1. X always goes first
         self.turn = -1
   
     def move(self, player, pos): # player is 'X' or 'O'. Pos is an integer from 0 to 8
-        # print('pos: ' + str(pos))
+        print('Player : ' + player + ' plays position:' + str(pos))
         if self.board[pos] == 0:
             if player == 'x':
                 self.board[pos] = -1
@@ -20,9 +22,10 @@ class Game():
             self.turn += 1
         else:
             return 'error'
+        print_board(self.board)
 
     def return_move(self, player, pos): # player is 'X' or 'O'. Pos is an integer from 0 to 8
-        return_board = self.board
+        return_board = copy.copy(self.board)
         print('pos: ' + str(pos))
         if return_board[pos] == 0:
             if player == 'x':
@@ -38,6 +41,7 @@ class Game():
         for i in range(0,9):
             if self.board[i] == 0:
                 open = np.append(open, i)
+        #print("open: ")
         #print(open)
         return open
 

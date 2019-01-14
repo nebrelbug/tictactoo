@@ -2,7 +2,7 @@ from random import *
 import numpy as np
 np.set_printoptions(threshold=np.nan)
 from Logic import is_game_won as score
-from Logic import human_readable as msg
+from Logic import msg
 from Game import Game
 import AIPlayer as AI
 from printboard import print_board
@@ -33,7 +33,7 @@ for i in range(0,30000): #Starts at 0. (0,1) will play 1 game with i==0
         if score(thisGame) != 'none':
             break 
     #print_board(thisGame.board)
-    #print(msg(score(thisGame)))
+    #msg(score(thisGame), thisGame.board)
     thisGameBoards = thisGameBoards[~np.all(thisGameBoards == 0, axis=1)]
     thisGameScores = np.full(len(thisGameBoards), score(thisGame) + 1, dtype=np.int)
     if i == 0: ## Initializing the arrays

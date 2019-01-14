@@ -4,8 +4,8 @@ from tensorflow import keras
 from randomboards import training_boards
 from randomscores import training_scores
 import os
-checkpoint_path = "training_1/cp.ckpt"
-checkpoint_dir = os.path.dirname(checkpoint_path)
+#checkpoint_path = "training_1/cp.ckpt"
+#checkpoint_dir = os.path.dirname(checkpoint_path)
 
 # Helper libraries
 import numpy as np
@@ -36,10 +36,7 @@ model.compile(optimizer=keras.optimizers.Adam(lr=0.001),
 #cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path, save_weights_only=True, verbose=1, period=5)
 
 model.fit(training_boards, training_scores, epochs=5)  # pass callback to training)
-keras.models.save_model(
-    model,
-    'savedmodel',
-)
+model.save_weights('my_model.h5')
 #test_loss, test_acc = model.evaluate(test_images, test_labels)
 
 #print('Test accuracy:', test_acc)
