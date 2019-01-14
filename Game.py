@@ -10,10 +10,10 @@ import matplotlib.pyplot as plt
 class Game():
     def __init__(self):
         self.board = np.array([0,0,0,0,0,0,0,0,0], dtype=int) # X's are -1, O's are +1. X always goes first
-        self.turn = -1
+        self.turn = 0
   
     def move(self, player, pos): # player is 'X' or 'O'. Pos is an integer from 0 to 8
-        print('Player : ' + player + ' plays position:' + str(pos))
+        print('Player ' + player + ' plays position:' + str(pos))
         if self.board[pos] == 0:
             if player == 'x':
                 self.board[pos] = -1
@@ -21,6 +21,7 @@ class Game():
                 self.board[pos] = 1
             self.turn += 1
         else:
+            print("AAAAAAAH!")
             return 'error'
         print_board(self.board)
 
