@@ -3,6 +3,8 @@ import tensorflow as tf
 from tensorflow import keras
 from randomboards import training_boards
 from randomscores import training_scores
+from testboards import training_boards as testboards
+from testscores import training_scores as testscores
 
 # Helper libraries
 import numpy as np
@@ -34,9 +36,9 @@ model.compile(optimizer=keras.optimizers.Adam(lr=0.001),
 
 model.fit(training_boards, training_scores, epochs=5)  # pass callback to training)
 model.save_weights('my_model.h5')
-#test_loss, test_acc = model.evaluate(test_images, test_labels)
+test_loss, test_acc = model.evaluate(testboards, testscores)
 
-#print('Test accuracy:', test_acc)
+print('Test accuracy:', test_acc)
 
 predictions = model.predict(np.array([[0,0,0,0,-1,0,0,0,0],[-1,-1,-1,0,1,1,0,0,0]]))
 print(predictions[0])
