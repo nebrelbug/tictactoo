@@ -8,11 +8,7 @@ import numpy as np
 model = keras.Sequential([
     keras.layers.Dense(24, activation=tf.nn.relu),
     keras.layers.Dense(168, activation=tf.nn.relu),
-    #keras.layers.Dense(8, activation=tf.nn.relu),
-    #keras.layers.SimpleRNN(units=2),
     keras.layers.Dense(91, activation=tf.nn.relu),
-
-    #keras.layers.Dense(64, activation=tf.nn.relu),
     keras.layers.Dense(3, activation=tf.nn.softmax)
 ])
 
@@ -26,37 +22,28 @@ model.fit(training_boards, training_scores, epochs=0)  # pass callback to traini
 model.load_weights('my_model.h5')
 
 class Player:
-    def __init__(self, XO): ## Player always sees itself as X. So if it's O, we multiply the board by -1
-        self.piece = XO
     
     def play(self, game, piece):
-        self.piece = piece
-        #if self.piece == 'o':
         open = game.open_positions()
-        next_positions = np.zeros((9, 9), dtype=np.int)
+        next_positions = np.zeros((9, 9), dtype=np.int) # Initialize the array
 
         for i in range(0,len(open)):
-            # print('open[i]: ' + str(open[i]))
-            next_positions[i] = game.return_move(piece, open[i])
+            next_positions[i] = game.return_move(piece, open[i]) # Add a possible next position
             
-        next_positions = next_positions[~np.all(next_positions == 0, axis=1)]
-        #print('next positions: ' + next_positions)
-        predictions = model.predict(next_positions)
-        #print("predictions: " + predictions[0])
+        next_positions = next_positions[~np.all(next_positions == 0, axis=1)] # Remove all empty next positions
+        predictions = model.predict(next_positions) # Generate predictions for each possible position
         move_to_return = open[0] # default move
-        # print("default move_to_return: " + str(move_to_return))
-        move_prob = 0
-        move_prediction = 2
+        move_prob = 0 # Initialize the prob of winning to 0
         if piece == 'o':
-            print('')
+            for index, prediction in enumerate(predictions):
+                if prediction[2] > move_prob:
+                    move_to_return = open[index] # Index is the prediction index, which corresponds to move in next_positions
+                    move_prob = prediction[2]
         elif piece == 'x':
             for index, prediction in enumerate(predictions):
                 if prediction[0] > move_prob:
                     move_to_return = open[index] # Index is the prediction index, which corresponds to move in next_positions
                     move_prob = prediction[0]
-                    move_prediction = np.argmax(prediction)
-        print('move_to_return: ' + str(move_to_return))
-        # print('move\'s type: ' + type(move_to_return).__name__)
         return move_to_return
 
     

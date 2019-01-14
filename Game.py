@@ -22,12 +22,10 @@ class Game():
             self.turn += 1
         else:
             print("AAAAAAAH!")
-            return 'error'
         print_board(self.board)
 
     def return_move(self, player, pos): # player is 'X' or 'O'. Pos is an integer from 0 to 8
         return_board = copy.copy(self.board)
-        print('pos: ' + str(pos))
         if return_board[pos] == 0:
             if player == 'x':
                 return_board[pos] = -1
@@ -42,8 +40,6 @@ class Game():
         for i in range(0,9):
             if self.board[i] == 0:
                 open = np.append(open, i)
-        #print("open: ")
-        #print(open)
         return open
 
 game = Game()
