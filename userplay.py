@@ -5,8 +5,6 @@ from Logic import is_game_won as score
 from Logic import msg
 from Game import Game
 import AIPlayer as AI
-import tensorflow as tf
-from printboard import print_board
 
 def playGame():
     if randint(0, 1) == 0:
@@ -30,7 +28,6 @@ def play_ai_as_x():
             thisGame.move('o', inputPos) ## player, pos
 
         if score(thisGame) != 'none': # If the game is won or drawn
-            print_board(thisGame.board)
             msg(score(thisGame), thisGame.board)
             break
 
@@ -48,7 +45,6 @@ def play_ai_as_o():
             thisGame.move('x', inputPos) ## player, pos
 
         if score(thisGame) != 'none': # If the game is won or drawn
-            print_board(thisGame.board)
             msg(score(thisGame), thisGame.board)
             break 
 
