@@ -1,4 +1,3 @@
-import random
 from tensorflow import keras
 import tensorflow as tf
 from randomboards import training_boards
@@ -45,11 +44,3 @@ class Player:
                     move_to_return = open[index] # Index is the prediction index, which corresponds to move in next_positions
                     move_prob = prediction[0]
         return move_to_return
-
-    
-    def play_random(self, game):
-        #print("game.board before play: " + ''.join(str(e) for e in game.board))
-        #print("open positions:" + ''.join(str(e) for e in game.open_positions()))
-        if len(game.open_positions()) == 0:
-            print("OHNONONONO")
-        return random.choice(game.open_positions())
