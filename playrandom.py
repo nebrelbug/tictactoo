@@ -10,7 +10,7 @@ scorefile = open("randomscores.py", "w")
 allGameBoards = np.array([])
 allGameScores = np.array([])
 
-for i in range(0,30000): #Starts at 0. (0,1) will play 1 game with i==0
+for i in range(0,3000): #Starts at 0. (0,1) will play 1 game with i==0
     thisGame = Game()
     thisGameBoards = np.zeros((9, 9), dtype=np.int)
     while score(thisGame) == 'none':

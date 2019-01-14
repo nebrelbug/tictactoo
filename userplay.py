@@ -20,7 +20,7 @@ def play_ai_as_x():
     while score(thisGame) == 'none':
         if thisGame.turn % 2 == 0: # turn is even, so it's x's turn
             aiMove = ai.play(thisGame, 'x')
-            print("ai wants to move: " + str(aiMove))
+            # print("ai wants to move: " + str(aiMove))
             thisGame.move('x', aiMove) ## player, pos
         else: # User's turn
             inputPos = input("O, your turn: ")
@@ -37,7 +37,7 @@ def play_ai_as_o():
     while score(thisGame) == 'none':
         if thisGame.turn % 2 != 0: # turn is even, so it's x's turn
             aiMove = ai.play(thisGame, 'o')
-            print("ai wants to move: " + str(aiMove))
+            # print("ai wants to move: " + str(aiMove))
             thisGame.move('o', aiMove) ## player, pos
         else: # User's turn
             inputPos = input("X, your turn: ")
