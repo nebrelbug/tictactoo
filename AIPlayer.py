@@ -37,8 +37,12 @@ class Player:
             print('')
         elif piece == 'x':
             for index, prediction in enumerate(predictions):
-                if np.argmax(prediction) <= move_prediction and prediction[np.argmax(prediction)] > move_prob: # if winner is better than the last moves 
+                #if np.argmax(prediction) < move_prediction and prediction[np.argmax(prediction)] > move_prob: # if winner is better than the last moves 
                                                                                            # winner and prob > last prob
+                                                                                           # Doesn't work because winner could be better
+                                                                                           # But probability less
+                                                                                           # Actually it might by using < not <=
+                if prediction[0] > move__prob
                     move_to_return = index
                     move_prob = prediction[0]
                     move_prediction = np.argmax(prediction)
