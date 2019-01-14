@@ -52,7 +52,7 @@ class Player:
         elif piece == 'x':
             for index, prediction in enumerate(predictions):
                 if prediction[0] > move_prob:
-                    move_to_return = next_positions[index] # Index is the prediction index, which corresponds to move in next_positions
+                    move_to_return = open[index] # Index is the prediction index, which corresponds to move in next_positions
                     move_prob = prediction[0]
                     move_prediction = np.argmax(prediction)
         print('move_to_return: ' + str(move_to_return))
