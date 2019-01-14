@@ -42,7 +42,7 @@ class Player:
                                                                                            # Doesn't work because winner could be better
                                                                                            # But probability less
                                                                                            # Actually it might by using < not <=
-                if prediction[0] > move__prob
+                if prediction[0] > move_prob:
                     move_to_return = index
                     move_prob = prediction[0]
                     move_prediction = np.argmax(prediction)
