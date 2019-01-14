@@ -3,9 +3,6 @@ import tensorflow as tf
 from tensorflow import keras
 from randomboards import training_boards
 from randomscores import training_scores
-import os
-#checkpoint_path = "training_1/cp.ckpt"
-#checkpoint_dir = os.path.dirname(checkpoint_path)
 
 # Helper libraries
 import numpy as np
