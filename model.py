@@ -26,7 +26,8 @@ class_names = ['X', 'draw', 'O']
 model = keras.Sequential()
 model.add(keras.layers.Reshape((3,3,1), input_shape=(9,1)))
 print(model.output_shape)
-model.add(keras.layers.Conv2D(filters=91, kernel_size=(2,2)))
+#model.add(keras.layers.Conv2D(filters=91, kernel_size=(2,2)))
+model.add(keras.layers.Conv2D(filters=168, kernel_size=(2,2)))
 model.add(keras.layers.Flatten())
 model.add(keras.layers.Dense(24, activation=tf.nn.relu))
 model.add(keras.layers.Dense(91, activation=tf.nn.relu))
@@ -44,8 +45,9 @@ test_loss, test_acc = model.evaluate(testboards, testscores)
 
 print('Test accuracy:', test_acc)
 
-test_predictors = np.expand_dims(np.array([[0,0,0,0,-1,0,0,0,0],[-1,-1,-1,0,1,1,0,0,0]]), axis=2)
+test_predictors = np.expand_dims(np.array([[0,0,0,0,-1,0,0,0,0],[-1,-1,-1,0,1,1,0,0,0], [1,1,1,0,0,-1,-1,-1,-1]]), axis=2)
 
 predictions = model.predict(test_predictors)
 print(predictions[0])
 print(predictions[1])
+print(predictions[2])

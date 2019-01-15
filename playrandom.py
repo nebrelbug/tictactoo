@@ -19,13 +19,14 @@ def return_boards():
         thisGameBoards = np.zeros((9, 9), dtype=np.int)
         while score(thisGame) == 'none':
             thisGame.move('x', Random(thisGame)) ## player, pos
-            thisGameBoards[thisGame.turn-1] = thisGame.board
+            thisGameBoards[thisGame.turn-1] = thisGame.board # np.array([thisGame.board, np.full((9), -1)])
             if score(thisGame) != 'none':
                 break
             thisGame.move('o', Random(thisGame)) ## player, pos
-            thisGameBoards[thisGame.turn] = thisGame.board
+            thisGameBoards[thisGame.turn-1] = thisGame.board
             if score(thisGame) != 'none':
                 break 
+        print(thisGameBoards)
         thisGameBoards = thisGameBoards[~np.all(thisGameBoards == 0, axis=1)]
         thisGameScores = np.full(len(thisGameBoards), score(thisGame) + 1, dtype=np.int)
         if i == 0: ## Initializing the arrays
