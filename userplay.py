@@ -18,7 +18,7 @@ def play_ai_as_x():
     thisGame = Game()
     ai = AI.Player()
     while score(thisGame) == 'none':
-        if thisGame.turn % 2 == 0: # turn is even, so it's x's turn
+        if thisGame.turn % 2 == 0: # turn is even, it's x's turn
             aiMove = ai.play(thisGame, 'x')
             # print("ai wants to move: " + str(aiMove))
             thisGame.move('x', aiMove) ## player, pos
