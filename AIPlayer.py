@@ -4,17 +4,17 @@ from randomboards import training_boards
 from randomscores import training_scores
 import numpy as np
 
-model = keras.Sequential([
-    keras.layers.Dense(24, activation=tf.nn.relu),
-    keras.layers.Dense(168, activation=tf.nn.relu),
-    keras.layers.Dense(91, activation=tf.nn.relu),
-    keras.layers.Dense(3, activation=tf.nn.softmax)
-])
-
+model = keras.Sequential()
+model.add(keras.layers.Dense(24, activation=tf.nn.relu))
+model.add(keras.layers.Dense(168, activation=tf.nn.relu))
+model.add(keras.layers.Conv2D(8, (2, 2), activation='relu'))
+model.add(keras.layers.Dense(91, activation=tf.nn.relu))
+model.add(keras.layers.Dense(3, activation=tf.nn.softmax))
 
 model.compile(optimizer=keras.optimizers.Adam(lr=0.001), 
             loss='sparse_categorical_crossentropy',
             metrics=['accuracy'])
+
 
 model.fit(training_boards, training_scores, epochs=0)  # pass callback to training)
 
