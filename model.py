@@ -30,6 +30,7 @@ model.add(keras.layers.Conv2D(filters=91, kernel_size=(2,2)))
 model.add(keras.layers.Flatten())
 model.add(keras.layers.Dense(24, activation=tf.nn.relu))
 model.add(keras.layers.Dense(91, activation=tf.nn.relu))
+model.add(keras.layers.Dense(16, activation=tf.nn.relu))
 model.add(keras.layers.Dense(168, activation=tf.nn.relu))
 model.add(keras.layers.Dense(3, activation=tf.nn.softmax))
 
