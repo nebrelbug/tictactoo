@@ -26,9 +26,9 @@ def is_game_won(game):
 
 def msg(score, board):
     if score == -1:
-        print("X wins!")
+        print("                 X WINS!")
     elif score == 1:
-        print("O wins!")
+        print("                 O WINS!")
     else:
-        print("It's a draw!")
+        print("                 IT'S A TIE!")
     print_board(board)

@@ -2,7 +2,9 @@ from string import Template
 
 tmp = Template("""
 $a|$b|$c
+-----
 $d|$e|$f
+-----
 $g|$h|$i
 """)
 

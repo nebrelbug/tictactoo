@@ -43,12 +43,12 @@ class Player:
         move_prob = 0 # Initialize the prob of winning to 0
         if piece == 'o':
             for index, prediction in enumerate(predictions):
-                if prediction[2] > move_prob:
+                if prediction[2] - prediction[0] > move_prob:
                     move_to_return = open[index] # Index is the prediction index, which corresponds to move in next_positions
-                    move_prob = prediction[2]
+                    move_prob = prediction[2] - prediction[0]
         elif piece == 'x':
             for index, prediction in enumerate(predictions):
-                if prediction[0] > move_prob:
+                if prediction[0] - prediction[2] > move_prob:
                     move_to_return = open[index] # Index is the prediction index, which corresponds to move in next_positions
-                    move_prob = prediction[0]
+                    move_prob = prediction[0] - prediction[2]
         return move_to_return
