@@ -25,7 +25,7 @@ class_names = ['X', 'draw', 'O']
 # Returns a short sequential model
 model = keras.Sequential()
 model.add(keras.layers.Reshape((3,3,1), input_shape=(9,1)))
-#print(model.output_shape)
+print(model.output_shape)
 model.add(keras.layers.Conv2D(filters=91, kernel_size=(2,2)))
 model.add(keras.layers.Flatten())
 model.add(keras.layers.Dense(24, activation=tf.nn.relu))

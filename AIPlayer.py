@@ -4,11 +4,18 @@ from randomboards import training_boards
 from randomscores import training_scores
 import numpy as np
 
+training_boards = np.expand_dims(training_boards, axis=2)
+print(training_boards.shape)
+
+
 model = keras.Sequential()
+model.add(keras.layers.Reshape((3,3,1), input_shape=(9,1)))
+#print(model.output_shape)
+model.add(keras.layers.Conv2D(filters=91, kernel_size=(2,2)))
+model.add(keras.layers.Flatten())
 model.add(keras.layers.Dense(24, activation=tf.nn.relu))
-model.add(keras.layers.Dense(168, activation=tf.nn.relu))
-model.add(keras.layers.Conv2D(8, (2, 2), activation='relu'))
 model.add(keras.layers.Dense(91, activation=tf.nn.relu))
+model.add(keras.layers.Dense(168, activation=tf.nn.relu))
 model.add(keras.layers.Dense(3, activation=tf.nn.softmax))
 
 model.compile(optimizer=keras.optimizers.Adam(lr=0.001), 
@@ -30,6 +37,7 @@ class Player:
             next_positions[i] = game.return_move(piece, open[i]) # Add a possible next position
             
         next_positions = next_positions[~np.all(next_positions == 0, axis=1)] # Remove all empty next positions
+        next_positions = np.expand_dims(next_positions, axis=2) # Give it a spacial dimension
         predictions = model.predict(next_positions) # Generate predictions for each possible position
         move_to_return = open[0] # default move
         move_prob = 0 # Initialize the prob of winning to 0

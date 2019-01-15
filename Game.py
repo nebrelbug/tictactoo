@@ -13,7 +13,7 @@ class Game():
         self.turn = 0
   
     def move(self, player, pos): # player is 'X' or 'O'. Pos is an integer from 0 to 8
-        print('Player ' + player + ' plays position:' + str(pos))
+        print('Player ' + player + ' plays at ' + str(pos))
         if self.board[pos] == 0:
             if player == 'x':
                 self.board[pos] = -1
@@ -21,7 +21,7 @@ class Game():
                 self.board[pos] = 1
             self.turn += 1
         else:
-            print("AAAAAAAH!")
+            print("Oops, that spot isn't open!")
         print_board(self.board)
 
     def return_move(self, player, pos): # player is 'X' or 'O'. Pos is an integer from 0 to 8
