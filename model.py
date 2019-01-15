@@ -37,7 +37,7 @@ model.compile(optimizer=keras.optimizers.Adam(lr=0.001),
             loss='sparse_categorical_crossentropy',
             metrics=['accuracy'])
 
-model.fit(training_boards, training_scores, epochs=5)  # pass callback to training)
+model.fit(training_boards, training_scores, epochs=15)  # pass callback to training)
 model.save_weights('my_model.h5')
 test_loss, test_acc = model.evaluate(testboards, testscores)
 
