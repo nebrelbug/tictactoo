@@ -1,0 +1,40 @@
+body {
+  font: 14px "Century Gothic", Futura, sans-serif;
+  margin: 20px;
+}
+
+ol,
+ul {
+  padding-left: 30px;
+}
+
+.game-info {
+  width: calc(48px + 30vw);
+  margin: auto;
+}
+
+.buttons {
+  width: 100%;
+}
+
+.game {
+  width: calc(48px + 30vw);
+  margin: auto;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 1em 1em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  width: 50%;
+}
+
+.button:hover {
+  background-color: rgb(16, 100, 18);
+}
