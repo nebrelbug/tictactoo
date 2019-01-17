@@ -12,24 +12,22 @@ class Game extends Component {
       board: [1,1,1,0,0,0,0,0,0],
       playing: false, // -1 if player is x, 1 if player is o
       turn: 0,
-      winner: false
+      winner: 'none'
     };
   }
 
   startGame(player) {
     this.setState({
-      board: [0,0,0,0,0,0,0,0,0]
+      board: [0,0,0,0,0,0,0,0,0],
+      turn: 0,
+      winner: 'none',
+      playing: player
     }, () => {
-      this.setState({
-        playing: player
-      }, () => {
-        console.log("You are player " + player)
-        if (player === 1) {
-          this.aiMove(AI.Play(this.state.board, -1))
-        }
-      })
+      console.log("You are player " + player)
+      if (player === 1) {
+        this.aiMove(AI.Play(this.state.board, -1))
+      }
     })
-
   }
 
   move(pos, player) {
@@ -37,12 +35,12 @@ class Game extends Component {
     var board = this.state.board
     board[pos] = player
     console.log("board: " + board)
-    let currentWinner = calculateWinner(this.state.board)
+    let currentWinner = calculateWinner(board)
     this.setState({
       board: board,
       turn: this.state.turn + 1,
       winner: currentWinner,
-      playing: (currentWinner ? false : this.state.playing)
+      playing: (currentWinner === 'none' ? this.state.playing : false)
     }, () => {
       if (player === this.state.playing) {
         this.aiMove(AI.Play(this.state.board, this.state.playing * -1))
@@ -56,7 +54,7 @@ class Game extends Component {
 
 
   handleBoardClick(i) {
-    if (!this.state.playing || this.state.winner || this.state.board[i] !== 0) { // If game over, game won, or square empty, do nothing
+    if (!this.state.playing || this.state.winner !== 'none' || this.state.board[i] !== 0) { // If game over, game won, or square empty, do nothing
       return
     } else {
       if (this.state.playing === -1) { // If user is X

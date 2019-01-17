@@ -15,9 +15,22 @@ export default function calculateWinner(squares) {
             return squares[a];
         }
     }
-    return false;
+    if (openPositions(squares).length === 0) {
+        return 0
+    }
+    return 'none';
 }
 
 export function isEven (n) {
     return n % 2 == 0
+}
+
+export function openPositions(board) {
+    let openPos = []
+    for (var i = 0; i < 9; i++) {
+        if (board[i] === 0) {
+            openPos.push(i)
+        }
+    }
+    return openPos 
 }
