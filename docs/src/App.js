@@ -9,7 +9,7 @@ class Game extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      board: [1,1,1,0,0,0,0,0,0],
+      board: [0,0,0,0,0,0,0,0,0],
       playing: false, // -1 if player is x, 1 if player is o
       turn: 0,
       winner: 'none'

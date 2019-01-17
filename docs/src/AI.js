@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {openPositions} from './Winner'
+import * as tf from '@tensorflow/tfjs';
 
 export function Play (board, player) {
     let openPos = openPositions(board)
