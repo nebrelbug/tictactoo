@@ -5,8 +5,8 @@ export function Buttons(props) {
     if (props.playing === false) {
       return (
         <div className="buttons">
-          <button className="button" onClick={() => props.onClick(-1)}>Play as X</button>
-          <button className="button" onClick={() => props.onClick(1)}>Play as O</button>
+          <button className="button" style={{marginRight:'2.5%'}} onClick={() => props.onClick(-1)}>Play as X</button>
+          <button className="button" style={{marginLeft:'2.5%'}} onClick={() => props.onClick(1)}>Play as O</button>
         </div>
         )
     } else {
