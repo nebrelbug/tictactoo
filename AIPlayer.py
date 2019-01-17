@@ -7,19 +7,7 @@ import numpy as np
 training_boards = np.expand_dims(training_boards, axis=2)
 print(training_boards.shape)
 
-
-model = keras.Sequential()
-model.add(keras.layers.Reshape((3,3,1), input_shape=(9,1)))
-print(model.output_shape)
-#model.add(keras.layers.Conv2D(filters=91, kernel_size=(2,2)))
-model.add(keras.layers.Conv2D(filters=64, kernel_size=(2,2)))
-model.add(keras.layers.Flatten())
-model.add(keras.layers.Dense(168, activation=tf.nn.relu))
-model.add(keras.layers.Dense(64, activation=tf.nn.relu))
-model.add(keras.layers.Dense(91, activation=tf.nn.relu))
-model.add(keras.layers.Dense(100, activation=tf.nn.relu))
-model.add(keras.layers.Dense(3, activation=tf.nn.softmax))
-
+model = keras.models.load_model("my_model.h5")
 
 model.compile(optimizer=keras.optimizers.Adam(lr=0.001), 
             loss='sparse_categorical_crossentropy',
