@@ -9,15 +9,6 @@ print(training_boards.shape)
 
 model = keras.models.load_model("my_model.h5")
 
-model.compile(optimizer=keras.optimizers.Adam(lr=0.001), 
-            loss='sparse_categorical_crossentropy',
-            metrics=['accuracy'])
-
-
-model.fit(training_boards, training_scores, epochs=0)  # pass callback to training)
-
-model.load_weights('my_model.h5')
-
 class Player:
     
     def play(self, game, piece):
@@ -31,15 +22,15 @@ class Player:
         next_positions = np.expand_dims(next_positions, axis=2) # Give it a spacial dimension
         predictions = model.predict(next_positions) # Generate predictions for each possible position
         move_to_return = open[0] # default move
-        move_prob = 0 # Initialize the prob of winning to 0
+        move_prob = -1000 # Initialize the prob of winning to 0
         if piece == 'o':
             for index, prediction in enumerate(predictions):
-                if prediction[2] ** 2 - prediction[0] > move_prob:
+                if prediction[2] - 1.1 * prediction[0] > move_prob:
                     move_to_return = open[index] # Index is the prediction index, which corresponds to move in next_positions
                     move_prob = prediction[2] - prediction[0]
         elif piece == 'x':
             for index, prediction in enumerate(predictions):
-                if prediction[0] ** 2 - prediction[2] > move_prob:
+                if prediction[0] - 1.1 * prediction[2] > move_prob:
                     move_to_return = open[index] # Index is the prediction index, which corresponds to move in next_positions
                     move_prob = prediction[0] - prediction[2]
         return move_to_return
