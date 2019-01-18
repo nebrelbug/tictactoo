@@ -13,7 +13,12 @@ class Game extends Component {
       playing: false, // -1 if player is x, 1 if player is o
       turn: 0,
       winner: 'none'
-    };
+    }
+    this.aiMove = this.aiMove.bind(this);
+    this.move = this.move.bind(this);
+    this.startGame = this.startGame.bind(this);
+    this.handleBoardClick = this.handleBoardClick.bind(this);
+
   }
 
   startGame(player) {
@@ -25,7 +30,7 @@ class Game extends Component {
     }, () => {
       console.log("You are player " + player)
       if (player === 1) {
-        this.aiMove(AI.Play(this.state.board, -1))
+        AI.Play(this.state.board, -1).then(this.aiMove)
       }
     })
   }
@@ -43,7 +48,7 @@ class Game extends Component {
       playing: (currentWinner === 'none' ? this.state.playing : false)
     }, () => {
       if (player === this.state.playing) {
-        this.aiMove(AI.Play(this.state.board, this.state.playing * -1))
+        AI.Play(this.state.board, -1).then(this.aiMove)
       }
     })
   }

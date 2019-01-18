@@ -7,6 +7,7 @@ from randomboards import training_boards
 from randomscores import training_scores
 from testboards import training_boards as testboards
 from testscores import training_scores as testscores
+import tensorflowjs as tfjs
 
 training_boards = np.expand_dims(training_boards, axis=2)
 print(training_boards.shape)
@@ -44,6 +45,8 @@ model.summary()
 model.fit(training_boards, training_scores, epochs=15)  # pass callback to training)
 # model.save_weights('my_model.h5')
 model.save('my_model.h5')
+tfjs.converters.save_keras_model(model, 'docs/src/models')
+
 test_loss, test_acc = model.evaluate(testboards, testscores)
 
 print('Test accuracy:', test_acc)
