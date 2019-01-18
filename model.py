@@ -45,7 +45,7 @@ model.summary()
 model.fit(training_boards, training_scores, epochs=15)  # pass callback to training)
 # model.save_weights('my_model.h5')
 model.save('my_model.h5')
-tfjs.converters.save_keras_model(model, 'docs/src/models')
+tfjs.converters.save_keras_model(model, 'docs/public/models')
 
 test_loss, test_acc = model.evaluate(testboards, testscores)
 

@@ -6,15 +6,12 @@ import {
 } from './Winner'
 import * as tf from '@tensorflow/tfjs';
 
-// async function getModel() {
-//     const model = await tf.loadModel(process.env.PUBLIC_URL + '/models/supermodel/model.json');
-//     return model
-// }
-
 
 export async function Play(board, player) {
     console.log("AI is playing: " + player)
-    let model = await tf.loadModel(process.env.PUBLIC_URL + '/models/supermodel/model.json')
+    // let model = await tf.loadModel(process.env.PUBLIC_URL + '/models/supermodel/model.json')
+    let model = await tf.loadModel(process.env.PUBLIC_URL + '/models/model.json') // supermodel was trained on only 6000, but for max perf this model used 20000 random games
+
     console.log("model loaded!")
 
     let openPos = openPositions(board)
